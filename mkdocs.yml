@@ -1,5 +1,8 @@
 site_name: Projet-SIO2
+
 nav:
-  - Home: index.md
-  - About: about.md
-theme: readthedocs
+  - Accueil: index.md
+  - Annexes: annexes.md
+theme: litera
+
+
