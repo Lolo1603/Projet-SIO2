@@ -34,3 +34,18 @@ Associer le port au VLAN : `Switchport access vlan [numéro de vlan]`
 Entrer dans la config du switch `username [admin] privilege 15 secret [password]`
 
 <br>
+## Activation du ssh
+
+Configurer le nom de domaine avec la commande suivante: `ip domain name cha.chartres.sportludique.local`
+
+Activer la version SSH la plus élevée prise en charge avec la commande `ip ssh version 2`
+
+Générer la pîre de clés RSA pour SSH : `crypto key generate-keys modulus 1024`
+
+Passez en mode configuration de lignes VTY avec la commande : `line vty 0 4`
+
+Configurez les lignes vty : `login local`
+
+Limitez l'accès VTY au transport SSH uniquement avec cette commande : `transport input ssh`
+
+On enrengistre la configuration : `write memory`
