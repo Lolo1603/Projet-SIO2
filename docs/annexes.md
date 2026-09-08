@@ -1,5 +1,5 @@
 # Annexes
-Ici vous allez trouvez toute les annexes
+Ici vous retrouverez toutes les annexes
 
 ## Shéma Logique
 

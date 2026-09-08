@@ -79,8 +79,28 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="2"><a href="#configuration-du-switch" class="nav-link">Configuration du switch</a>
+            <li class="nav-item" data-bs-level="1"><a href="#configuration-du-switch" class="nav-link">Configuration du switch</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#renommage-du-switch" class="nav-link">Renommage du switch</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#creer-les-differents-vlan-necessaires" class="nav-link">Créer les différents Vlan nécessaires</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#attribuer-des-ports-aux-vlans" class="nav-link">Attribuer des ports aux VLANS</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#creation-dun-utilisateur" class="nav-link">Creation d'un utilisateur</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#activation-du-ssh" class="nav-link">Activation du ssh</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -88,19 +108,34 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h2 id="configuration-du-switch">Configuration du switch</h2>
+<h1 id="configuration-du-switch">Configuration du switch</h1>
 <p>Réinitialisation du switch <code>erase config-startup</code>
 Cette commande permet de supprimer la configuration actuelle du switch.</p>
-<p>Renommage du switch</p>
+<p><br></p>
+<h2 id="renommage-du-switch">Renommage du switch</h2>
 <p>Passer en mode privilégié avec la commande suivante : <code>enable</code></p>
 <p>Taper la commande suivante pour entrer dans le mode configuration terminal : <code>configure terminal</code></p>
 <p>Pour le renommer, on entrera la commande suivante : <code>hostname ‘nom du switch’</code></p>
-<p>Créer les différents Vlan nécessaires</p>
+<p><br></p>
+<h2 id="creer-les-differents-vlan-necessaires">Créer les différents Vlan nécessaires</h2>
 <p>Toujours en mode privilégié tapez la commande suivante <code>vlan [numéro du port]</code> puis <code>name [nom_du_VLAN]</code></p>
-<p>Attribuer des ports aux VLANS</p>
+<p><br></p>
+<h2 id="attribuer-des-ports-aux-vlans">Attribuer des ports aux VLANS</h2>
 <p>Tout en étant dans la configuration du switch, entrez la commande suivante : <code>interface [numéro du port]</code></p>
 <p>Définir le mode d’accès : <code>switchport mode access/trunk</code></p>
-<p>Associer le port au VLAN : <code>Switchport access vlan [numéro de vlan]</code></p></div>
+<p>Associer le port au VLAN : <code>Switchport access vlan [numéro de vlan]</code></p>
+<p><br></p>
+<h2 id="creation-dun-utilisateur">Creation d'un utilisateur</h2>
+<p>Entrer dans la config du switch <code>username [admin] privilege 15 secret [password]</code></p>
+<p><br></p>
+<h2 id="activation-du-ssh">Activation du ssh</h2>
+<p>Configurer le nom de domaine avec la commande suivante: <code>ip domain name cha.chartres.sportludique.local</code></p>
+<p>Activer la version SSH la plus élevée prise en charge avec la commande <code>ip ssh version 2</code></p>
+<p>Générer la pîre de clés RSA pour SSH : <code>crypto key generate-keys modulus 1024</code></p>
+<p>Passez en mode configuration de lignes VTY avec la commande : <code>line vty 0 4</code></p>
+<p>Configurez les lignes vty : <code>login local</code></p>
+<p>Limitez l'accès VTY au transport SSH uniquement avec cette commande : <code>transport input ssh</code></p>
+<p>On enrengistre la configuration : <code>write memory</code></p></div>
             </div>
         </div>
 
