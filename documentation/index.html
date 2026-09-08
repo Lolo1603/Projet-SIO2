@@ -97,6 +97,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#activation-du-ssh" class="nav-link">Activation du ssh</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -123,7 +127,15 @@ Cette commande permet de supprimer la configuration actuelle du switch.</p>
 <p><br></p>
 <h2 id="creation-dun-utilisateur">Creation d'un utilisateur</h2>
 <p>Entrer dans la config du switch <code>username [admin] privilege 15 secret [password]</code></p>
-<p><br></p></div>
+<p><br></p>
+<h2 id="activation-du-ssh">Activation du ssh</h2>
+<p>Configurer le nom de domaine avec la commande suivante: <code>ip domain name cha.chartres.sportludique.local</code></p>
+<p>Activer la version SSH la plus élevée prise en charge avec la commande <code>ip ssh version 2</code></p>
+<p>Générer la pîre de clés RSA pour SSH : <code>crypto key generate-keys modulus 1024</code></p>
+<p>Passez en mode configuration de lignes VTY avec la commande : <code>line vty 0 4</code></p>
+<p>Configurez les lignes vty : <code>login local</code></p>
+<p>Limitez l'accès VTY au transport SSH uniquement avec cette commande : <code>transport input ssh</code></p>
+<p>On enrengistre la configuration : <code>write memory</code></p></div>
             </div>
         </div>
 
