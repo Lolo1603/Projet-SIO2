@@ -1,7 +1,8 @@
-site_name: Projet-SIO2
+site_name: Sport-Ludique Chartres 
 
 nav:
   - Accueil: index.md
+  - Documentation: documentation.md
   - Annexes: annexes.md
 theme: litera
 
