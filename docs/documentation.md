@@ -49,3 +49,15 @@ Configurez les lignes vty : `login local`
 Limitez l'accès VTY au transport SSH uniquement avec cette commande : `transport input ssh`
 
 On enrengistre la configuration : `write memory`
+
+<br>
+<br>
+# Configuration Routeur
+
+## Mise en place du NAT
+
+Pour commencer, nous configurons l'adressage des ports avec la commande suivante: `ip address 172.128.162.254 255.255.255.0` Elle correspond a notre port interne.
+
+Pour le port externe nous aurons `ip address 221.87.128.2 255.255.255.252`
+
+Et nous activons les interfaces avec la commande `no shutdown`

@@ -1,12 +1,23 @@
 # Annexes
 Ici vous retrouverez toutes les annexes
 
-## Shéma Logique
+
+## Schéma Logique (Actuelle)
+
+![Schéma Logique Actuelle](img/schema_logique_actuelle.png)
+
+<br>
+## Shéma Logique (objectif)
 
 ![Schéma logique](img/schema_logique.png)
 
-Ceci est le schéma logique du réseau
+Ceci est un objectif de schéma logique du réseau 
 
+
+
+
+
+<br>
 ## Plan d'adressage IP
 
 | Nom | Vlan | IP |
@@ -16,7 +27,7 @@ Ceci est le schéma logique du réseau
 | Clients | 221 | 172.28.221.0/24 |
 | LAN | 222 | 172.28.222.0/24 |
 
-
+<br>
 ## Plage IP Site
 
 |          | Reseau       | Broadcast      |
@@ -26,3 +37,35 @@ Ceci est le schéma logique du réseau
 | Tours    | 172.28.64.0  | 172.28.127.255 |
 | Orleans  | 172.28.128.0 | 172.28.159.255 |
 | Blois    | 172.28.32.0  | 172.28.63.255  |
+
+<br>
+## Plan De Brassage
+
+| SW-Chartres | Ports | VLAN |
+|:-:|:-:|:-:|
+| | Fa0/1 | |
+| | Fa0/2 | |
+| | Fa0/3 | |
+| | Fa0/4 | |
+| | Fa0/5 | |
+| | Fa0/6 | 222 |
+| | Fa0/7 | |
+| | Fa0/8 | 222 |
+| | Fa0/9 | |
+| | Fa0/10 | |
+| | Fa0/11 | |
+| | Fa0/12 | |
+| | Fa0/13 | |
+| | Fa0/14 | |
+| | Fa0/15 | |
+| | Fa0/16 | |
+| | Fa0/17 | |
+| | Fa0/18 | |
+| | Fa0/19 | |
+| | Fa0/20 | |
+| | Fa0/21 | |
+| R1-Chartres | Fa0/22 | 222 |
+| | Fa0/23 | 120 |
+| | Fa0/24 | 120 |
+| | Gi0/1 | |
+| | Gi0/2 | |
