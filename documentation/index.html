@@ -103,6 +103,15 @@
             </li>
               </ul>
             </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#configuration-routeur" class="nav-link">Configuration Routeur</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#mise-en-place-du-nat" class="nav-link">Mise en place du NAT</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
         </ul>
     </div>
 </div></div>
@@ -135,7 +144,14 @@ Cette commande permet de supprimer la configuration actuelle du switch.</p>
 <p>Passez en mode configuration de lignes VTY avec la commande : <code>line vty 0 4</code></p>
 <p>Configurez les lignes vty : <code>login local</code></p>
 <p>Limitez l'accès VTY au transport SSH uniquement avec cette commande : <code>transport input ssh</code></p>
-<p>On enrengistre la configuration : <code>write memory</code></p></div>
+<p>On enrengistre la configuration : <code>write memory</code></p>
+<p><br>
+<br></p>
+<h1 id="configuration-routeur">Configuration Routeur</h1>
+<h2 id="mise-en-place-du-nat">Mise en place du NAT</h2>
+<p>Pour commencer, nous configurons l'adressage des ports avec la commande suivante: <code>ip address 172.128.162.254 255.255.255.0</code> Elle correspond a notre port interne.</p>
+<p>Pour le port externe nous aurons <code>ip address 221.87.128.2 255.255.255.252</code></p>
+<p>Et nous activons les interfaces avec la commande <code>no shutdown</code></p></div>
             </div>
         </div>
 
