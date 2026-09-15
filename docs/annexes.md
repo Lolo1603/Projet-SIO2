@@ -1,6 +1,5 @@
 # Annexes
-Ici vous retrouverez toutes les annexes
-
+Toutes les annexes réunit sur cette page
 
 ## Schéma Logique (Actuelle)
 
@@ -25,7 +24,7 @@ Ceci est un objectif de schéma logique du réseau
 | Management | 120 | 10.28.2.0/28 |
 | Serveur | 220 | 172.28.220.0/24 |
 | Clients | 221 | 172.28.221.0/24 |
-| LAN | 222 | 172.28.222.0/24 |
+| LAN | 222 | 192.168.222.0/24 |
 
 <br>
 ## Plage IP Site
@@ -43,29 +42,29 @@ Ceci est un objectif de schéma logique du réseau
 
 | SW-Chartres | Ports | VLAN |
 |:-:|:-:|:-:|
-| R1-CHA | Fa0/1 | Trunk |
-| | Fa0/2 | |
-| | Fa0/3 | |
-| | Fa0/4 | |
-| | Fa0/5 | |
-| | Fa0/6 | 222 |
-| | Fa0/7 | |
-| | Fa0/8 | 222 |
-| | Fa0/9 | |
-| | Fa0/10 | |
-| | Fa0/11 | |
-| | Fa0/12 | |
-| | Fa0/13 | |
-| | Fa0/14 | |
-| | Fa0/15 | |
-| | Fa0/16 | |
-| | Fa0/17 | |
-| | Fa0/18 | |
-| | Fa0/19 | |
-| | Fa0/20 | |
-| | Fa0/21 | |
-| | Fa0/22 | 222 |
-| | Fa0/23 | 120 |
-| | Fa0/24 | 120 |
+| R1-CHA | Gig0/1 | Trunk |
+| | Gig0/2 | |
+| | Gig0/3 | |
+| | Gig0/4 | |
+| | Gig0/5 | |
+| | Gig0/6 | 222 |
+| | Gig0/7 | |
+| | Gig0/8 | 222 |
+| | Gig0/9 | |
+| | Gig0/10 | |
+| | Gig0/11 | CLIENT |
+| | Gig0/12 | CLIENT |
+| | Gig0/13 | CLIENT |
+| | Gig0/14 | |
+| | Gig0/15 | |
+| | Gig0/16 | |
+| | Gig0/17 | |
+| | Gig0/18 | |
+| | Gig0/19 | |
+| | Gig0/20 | |
+| | Gig0/21 | |
+| | Gig0/22 | 222 |
+| | Gig0/23 | 120 |
+| | Gig0/24 | 120 |
 | | Gi0/1 | |
 | | Gi0/2 | |
