@@ -56,8 +56,12 @@ On enrengistre la configuration : `write memory`
 
 ## Mise en place du NAT
 
-Pour commencer, nous configurons l'adressage des ports avec la commande suivante: `ip address 172.128.162.254 255.255.255.0` Elle correspond a notre port interne.
+Pour commencer, nous créeons la sous interface pour le vlan mana avec la commande suivante : `interface gig0/0.120` avec l'adresse ip `10.28.2.253/24`
 
-Pour le port externe nous aurons `ip address 221.87.128.2 255.255.255.252`
+nous configurons l'adressage des ports avec la commande suivante: `ip address 172.128.162.254 255.255.255.0` et nous configurons le port en `ip nat inside`
+
+Pour le port externe (gig0/1) `ip address 221.87.128.1 255.255.255.252` et nous configurons le port sous en `ip nat outside`
 
 Et nous activons les interfaces avec la commande `no shutdown`
+
+Nous mettons le ssh en place sur l'interface virtuelle gig0/0.120 qui va servir pour le mana.

@@ -43,7 +43,7 @@ Ceci est un objectif de schéma logique du réseau
 
 | SW-Chartres | Ports | VLAN |
 |:-:|:-:|:-:|
-| | Fa0/1 | |
+| R1-CHA | Fa0/1 | Trunk |
 | | Fa0/2 | |
 | | Fa0/3 | |
 | | Fa0/4 | |
@@ -64,7 +64,7 @@ Ceci est un objectif de schéma logique du réseau
 | | Fa0/19 | |
 | | Fa0/20 | |
 | | Fa0/21 | |
-| R1-Chartres | Fa0/22 | 222 |
+| | Fa0/22 | 222 |
 | | Fa0/23 | 120 |
 | | Fa0/24 | 120 |
 | | Gi0/1 | |
