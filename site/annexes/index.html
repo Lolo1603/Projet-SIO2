@@ -89,11 +89,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#plan-dadressage-ip" class="nav-link">Plan d'adressage IP</a>
+            <li class="nav-item" data-bs-level="2"><a href="#plage-ip-site" class="nav-link">Plage IP Site</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#plage-ip-site" class="nav-link">Plage IP Site</a>
+            <li class="nav-item" data-bs-level="2"><a href="#plan-dadressage-ip" class="nav-link">Plan d'adressage IP</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -116,39 +116,6 @@
 <h2 id="shema-logique-objectif">Shéma Logique (objectif)</h2>
 <p><img alt="Schéma logique" src="../img/schema_logique.png" /></p>
 <p>Ceci est un objectif de schéma logique du réseau </p>
-<p><br></p>
-<h2 id="plan-dadressage-ip">Plan d'adressage IP</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Nom</th>
-<th style="text-align: center;">Vlan</th>
-<th style="text-align: center;">IP</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">Management</td>
-<td style="text-align: center;">120</td>
-<td style="text-align: center;">10.28.2.0/28</td>
-</tr>
-<tr>
-<td style="text-align: center;">Serveur</td>
-<td style="text-align: center;">220</td>
-<td style="text-align: center;">172.28.220.0/24</td>
-</tr>
-<tr>
-<td style="text-align: center;">Clients</td>
-<td style="text-align: center;">221</td>
-<td style="text-align: center;">172.28.221.0/24</td>
-</tr>
-<tr>
-<td style="text-align: center;">LAN</td>
-<td style="text-align: center;">222</td>
-<td style="text-align: center;">192.168.222.0/24</td>
-</tr>
-</tbody>
-</table>
 <p><br></p>
 <h2 id="plage-ip-site">Plage IP Site</h2>
 <table>
@@ -184,6 +151,39 @@
 <td>Blois</td>
 <td>172.28.32.0</td>
 <td>172.28.63.255</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<h2 id="plan-dadressage-ip">Plan d'adressage IP</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Nom</th>
+<th style="text-align: center;">Vlan</th>
+<th style="text-align: center;">IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">MANA</td>
+<td style="text-align: center;">120</td>
+<td style="text-align: center;">10.28.2.0/28</td>
+</tr>
+<tr>
+<td style="text-align: center;">SERVEUR</td>
+<td style="text-align: center;">220</td>
+<td style="text-align: center;">172.28.220.0/24</td>
+</tr>
+<tr>
+<td style="text-align: center;">CLIENT</td>
+<td style="text-align: center;">221</td>
+<td style="text-align: center;">172.28.221.0/24</td>
+</tr>
+<tr>
+<td style="text-align: center;">LAN</td>
+<td style="text-align: center;">222</td>
+<td style="text-align: center;">192.168.222.0/24</td>
 </tr>
 </tbody>
 </table>
@@ -226,7 +226,7 @@
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/6</td>
-<td style="text-align: center;">222</td>
+<td style="text-align: center;">LAN</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
@@ -236,17 +236,17 @@
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/8</td>
-<td style="text-align: center;">222</td>
+<td style="text-align: center;">LAN</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/9</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">SERVEUR</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/10</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">SERVEUR</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
@@ -306,17 +306,17 @@
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/22</td>
-<td style="text-align: center;">222</td>
+<td style="text-align: center;">LAN</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/23</td>
-<td style="text-align: center;">120</td>
+<td style="text-align: center;">MANA</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/24 </td>
-<td style="text-align: center;"> 120</td>
+<td style="text-align: center;">MANA</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
