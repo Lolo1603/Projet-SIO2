@@ -12,20 +12,6 @@ Toutes les annexes réunit sur cette page
 
 Ceci est un objectif de schéma logique du réseau 
 
-
-
-
-
-<br>
-## Plan d'adressage IP
-
-| Nom | Vlan | IP |
-|:---:|:----:|:--:|
-| Management | 120 | 10.28.2.0/28 |
-| Serveur | 220 | 172.28.220.0/24 |
-| Clients | 221 | 172.28.221.0/24 |
-| LAN | 222 | 192.168.222.0/24 |
-
 <br>
 ## Plage IP Site
 
@@ -37,6 +23,18 @@ Ceci est un objectif de schéma logique du réseau
 | Orleans  | 172.28.128.0 | 172.28.159.255 |
 | Blois    | 172.28.32.0  | 172.28.63.255  |
 
+
+<br>
+## Plan d'adressage IP
+
+| Nom | Vlan | IP |
+|:---:|:----:|:--:|
+| MANA | 120 | 10.28.2.0/28 |
+| SERVEUR | 220 | 172.28.220.0/24 |
+| CLIENT | 221 | 172.28.221.0/24 |
+| LAN | 222 | 192.168.222.0/24 |
+
+
 <br>
 ## Plan De Brassage
 
@@ -47,11 +45,11 @@ Ceci est un objectif de schéma logique du réseau
 | | Gig0/3 | |
 | | Gig0/4 | |
 | | Gig0/5 | |
-| | Gig0/6 | 222 |
+| | Gig0/6 | LAN |
 | | Gig0/7 | |
-| | Gig0/8 | 222 |
-| | Gig0/9 | |
-| | Gig0/10 | |
+| | Gig0/8 | LAN |
+| | Gig0/9 | SERVEUR |
+| | Gig0/10 | SERVEUR|
 | | Gig0/11 | CLIENT |
 | | Gig0/12 | CLIENT |
 | | Gig0/13 | CLIENT |
@@ -63,8 +61,8 @@ Ceci est un objectif de schéma logique du réseau
 | | Gig0/19 | |
 | | Gig0/20 | |
 | | Gig0/21 | |
-| | Gig0/22 | 222 |
-| | Gig0/23 | 120 |
-| | Gig0/24 | 120 |
+| | Gig0/22 | LAN |
+| | Gig0/23 | MANA |
+| | Gig0/24 | MANA |
 | | Gi0/1 | |
 | | Gi0/2 | |

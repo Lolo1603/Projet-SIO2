@@ -110,6 +110,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#mise-en-place-internet-sur-les-vlans" class="nav-link">Mise en place internet sur les vlans</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -137,7 +141,8 @@
 <p><code>username [admin] privilege 15 secret [password]</code></p>
 <p><br></p>
 <h2 id="activation-du-ssh">Activation du ssh</h2>
-<p><code>ip domain name cha.chartres.sportludique.local</code></p>
+<p>Et nous activons les interfaces avec la commande 
+<code>ip domain name cha.chartres.sportludique.local</code></p>
 <p><code>ip ssh version 2</code></p>
 <p><code>crypto key generate-keys modulus 1024</code></p>
 <p><code>line vty 0 4</code></p>
@@ -148,11 +153,15 @@
 <br></p>
 <h1 id="configuration-routeur">Configuration Routeur</h1>
 <h2 id="mise-en-place-du-nat">Mise en place du NAT</h2>
-<p>Interface du VLAN 120 <code>interface gig0/0.120</code> avec l'adresse ip <code>10.28.2.253 255.255.255.0</code></p>
-<p>Interface du VLAN 222 <code>ip address 192.168.222.254 255.255.255.0</code> et <code>ip nat inside</code></p>
+<p>Interface du VLAN 120 <code>interface gig0/0.120</code> avec l'adresse ip <code>10.28.2.253 255.255.255.0</code> </p>
+<p>Interface du VLAN 222 <code>ip address 192.168.222.254 255.255.255.0</code> et <code>ip nat inside</code> avec <code>l'encapsulation dot1Q</code></p>
 <p>Interface WAN <code>ip address 221.87.128.1 255.255.255.252</code> et <code>ip nat outside</code></p>
 <p><code>no shutdown</code></p>
-<p>Route par défaut : <code>ip route 0.0.0.0 0.0.0.0 221.87.128.2</code></p></div>
+<p>Route par défaut : <code>ip route 0.0.0.0 0.0.0.0 221.87.128.2</code></p>
+<p>On mets une acess-list pour avoir internet sur tous les réseaux sauf Mana <code>access-list 1 permit 172.28.160.0 0.0.31.255</code></p>
+<h2 id="mise-en-place-internet-sur-les-vlans">Mise en place internet sur les vlans</h2>
+<p>On mets la route par défaut pour le switch : <code>0.0.0.0 0.0.0.0 192.168.222.254</code></p>
+<p>On mets la route sur le routeur pour qu'il connaisse le VLAN 221: <code>172.28.161.0 255.255.255.0 192.168.222.1</code></p></div>
             </div>
         </div>
 
