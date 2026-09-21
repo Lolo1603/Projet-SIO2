@@ -13,6 +13,11 @@ Toutes les annexes réunit sur cette page
 Ceci est un objectif de schéma logique du réseau 
 
 <br>
+
+## Schéma Mana
+
+![Schéma Mana](img/schema_mana.png) 
+<br>
 ## Plage IP Site
 
 |          | Reseau       | Broadcast      |
