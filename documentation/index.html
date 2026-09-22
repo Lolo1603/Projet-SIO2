@@ -114,6 +114,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#mise-en-place-du-2eme-routeur" class="nav-link">Mise en place du 2eme Routeur</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -125,33 +129,37 @@
 <p>Réinitialisation du switch <code>erase config-startup</code></p>
 <p><br></p>
 <h2 id="renommage-du-switch">Renommage du switch</h2>
-<p><code>enable</code></p>
-<p><code>configure terminal</code></p>
-<p><code>hostname ‘nom du switch’</code></p>
+<pre><code> enable
+ configure terminal
+ hostname ‘nom du switch'
+</code></pre>
 <p><br></p>
 <h2 id="creer-les-differents-vlan-necessaires">Créer les différents Vlan nécessaires</h2>
 <p><code>vlan [numéro du port]</code> puis <code>name [nom_du_VLAN]</code></p>
 <p><br></p>
 <h2 id="attribuer-des-ports-aux-vlans">Attribuer des ports aux VLANS</h2>
-<p><code>interface [numéro du port]</code></p>
-<p><code>switchport mode access/trunk</code></p>
-<p><code>Switchport access vlan [numéro de vlan]</code></p>
+<pre><code>interface [numéro du port]
+switchport mode access/trunk
+Switchport access vlan [numéro de vlan]
+</code></pre>
 <p><br></p>
 <h2 id="creation-dun-utilisateur">Creation d'un utilisateur</h2>
 <p><code>username [admin] privilege 15 secret [password]</code></p>
 <p><br></p>
 <h2 id="activation-du-ssh">Activation du ssh</h2>
-<p>Et nous activons les interfaces avec la commande 
-<code>ip domain name cha.chartres.sportludique.local</code></p>
-<p><code>ip ssh version 2</code></p>
-<p><code>crypto key generate-keys modulus 1024</code></p>
-<p><code>line vty 0 4</code></p>
-<p><code>login local</code></p>
-<p><code>transport input ssh</code></p>
-<p><code>write memory</code></p>
+<p>Et nous activons les interfaces avec la commande </p>
+<pre><code>ip domain name cha.chartres.sportludique.local
+ip ssh version 2
+crypto key generate-keys modulus 1024
+line vty 0 4
+login local
+transport input ssh
+write memory
+</code></pre>
 <p><br>
 <br></p>
 <h1 id="configuration-routeur">Configuration Routeur</h1>
+<p><br></p>
 <h2 id="mise-en-place-du-nat">Mise en place du NAT</h2>
 <p>Interface du VLAN 120 <code>interface gig0/0.120</code> avec l'adresse ip <code>10.28.2.253 255.255.255.0</code> </p>
 <p>Interface du VLAN 222 <code>ip address 192.168.222.254 255.255.255.0</code> et <code>ip nat inside</code> avec <code>l'encapsulation dot1Q</code></p>
@@ -159,9 +167,24 @@
 <p><code>no shutdown</code></p>
 <p>Route par défaut : <code>ip route 0.0.0.0 0.0.0.0 221.87.128.2</code></p>
 <p>On mets une acess-list pour avoir internet sur tous les réseaux sauf Mana <code>access-list 1 permit 172.28.160.0 0.0.31.255</code></p>
+<p><br></p>
 <h2 id="mise-en-place-internet-sur-les-vlans">Mise en place internet sur les vlans</h2>
 <p>On mets la route par défaut pour le switch : <code>0.0.0.0 0.0.0.0 192.168.222.254</code></p>
-<p>On mets la route sur le routeur pour qu'il connaisse le VLAN 221: <code>172.28.161.0 255.255.255.0 192.168.222.1</code></p></div>
+<p>On mets la route sur le routeur pour qu'il connaisse le VLAN 221: <code>172.28.161.0 255.255.255.0 192.168.222.1</code></p>
+<h2 id="mise-en-place-du-2eme-routeur">Mise en place du 2eme Routeur</h2>
+<p>On met un deuxieme routeur pour assurer la disponibilité</p>
+<p>On copie la conf du premier routeur sur le deuxieme</p>
+<p>On config HSRP sur les 2 routeurs</p>
+<p>R1:</p>
+<pre><code> standby 1 ip 192.168.222.253
+ standby 1 priority 110
+ standby 1 preempt
+</code></pre>
+<p>R2:</p>
+<pre><code> standby 1 ip 192.168.222.252
+ standby 1 priority 100
+ standby 1 preempt
+</code></pre></div>
             </div>
         </div>
 
