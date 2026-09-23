@@ -1,16 +1,10 @@
 # Annexes
 Toutes les annexes réunit sur cette page
 
-## Schéma Logique (Actuelle)
+## Schéma Logique
 
 ![Schéma Logique Actuelle](img/schema_logique_actuelle.png)
 
-<br>
-## Shéma Logique (objectif)
-
-![Schéma logique](img/schema_logique.png)
-
-Ceci est un objectif de schéma logique du réseau 
 
 <br>
 
@@ -46,7 +40,7 @@ Ceci est un objectif de schéma logique du réseau
 | SW-Chartres | Ports | VLAN |
 |:-:|:-:|:-:|
 | R1-CHA | Gig0/1 | Trunk |
-| | Gig0/2 | |
+| R2-CHA | Gig0/2 | Trunk |
 | | Gig0/3 | |
 | | Gig0/4 | |
 | | Gig0/5 | |
@@ -64,7 +58,7 @@ Ceci est un objectif de schéma logique du réseau
 | | Gig0/17 | |
 | | Gig0/18 | |
 | | Gig0/19 | |
-| | Gig0/20 | |
+| | Gig0/20 | Serveur |
 | | Gig0/21 | |
 | | Gig0/22 | LAN |
 | | Gig0/23 | MANA |

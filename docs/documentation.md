@@ -7,13 +7,11 @@ Réinitialisation du switch `erase config-startup`
 
 <br>
 ## Renommage du switch
- 
-`enable`
-
-`configure terminal`
-
-`hostname ‘nom du switch’`
-
+```
+ enable
+ configure terminal
+ hostname ‘nom du switch'
+```
 <br>
 ## Créer les différents Vlan nécessaires
 
@@ -21,12 +19,11 @@ Réinitialisation du switch `erase config-startup`
 
 <br>
 ## Attribuer des ports aux VLANS
-
-`interface [numéro du port]`
-
-`switchport mode access/trunk`
-
-`Switchport access vlan [numéro de vlan]`
+```
+interface [numéro du port]
+switchport mode access/trunk
+Switchport access vlan [numéro de vlan]
+```
 
 <br>
 ## Creation d'un utilisateur
@@ -37,24 +34,20 @@ Réinitialisation du switch `erase config-startup`
 ## Activation du ssh
 
 Et nous activons les interfaces avec la commande 
-`ip domain name cha.chartres.sportludique.local`
-
-`ip ssh version 2`
-
-`crypto key generate-keys modulus 1024`
-
-`line vty 0 4`
-
-`login local`
-
-`transport input ssh`
-
-`write memory`
-
+```
+ip domain name cha.chartres.sportludique.local
+ip ssh version 2
+crypto key generate-keys modulus 1024
+line vty 0 4
+login local
+transport input ssh
+write memory
+```
 <br>
 <br>
 # Configuration Routeur
 
+<br>
 ## Mise en place du NAT
 
 Interface du VLAN 120 `interface gig0/0.120` avec l'adresse ip `10.28.2.253 255.255.255.0` 
@@ -69,8 +62,32 @@ Route par défaut : `ip route 0.0.0.0 0.0.0.0 221.87.128.2`
 
 On mets une acess-list pour avoir internet sur tous les réseaux sauf Mana `access-list 1 permit 172.28.160.0 0.0.31.255`
 
-##Mise en place internet sur les vlans
+<br>
+## Mise en place internet sur les vlans
 
 On mets la route par défaut pour le switch : `0.0.0.0 0.0.0.0 192.168.222.254`
 
 On mets la route sur le routeur pour qu'il connaisse le VLAN 221: `172.28.161.0 255.255.255.0 192.168.222.1`
+
+## Mise en place du 2eme Routeur
+
+On met un deuxieme routeur pour assurer la disponibilité
+
+On copie la conf du premier routeur sur le deuxieme
+
+On config HSRP sur les 2 routeurs
+
+R1:
+```
+ standby 1 ip 192.168.222.253
+ standby 1 priority 110
+ standby 1 preempt
+```
+
+R2:
+```
+ standby 1 ip 192.168.222.252
+ standby 1 priority 100
+ standby 1 preempt
+```
+
