@@ -3,7 +3,7 @@ Toutes les annexes réunit sur cette page
 
 ## Schéma Logique
 
-![Schéma Logique Actuelle](img/schema_logique_actuelle.png)
+![Schéma Logique Actuelle](img/schema_logique.png)
 
 
 <br>

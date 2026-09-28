@@ -1,3 +1,3 @@
-# Sport-Ludique Chartres
+# Sport-ludique Chartres
 
 ## Objectif du projet
