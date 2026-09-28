@@ -91,3 +91,25 @@ R2:
  standby 1 preempt
 ```
 
+## Installation du DC1 & GUI1
+
+Le DC1 sera en mode core et le gui sera une interface graphique.
+
+Pour la création des VMs les ressources sont les mêmes : 2 coeurs, 4go de RAM.
+
+Nous les avons mis sur deux noeuds différents pour éviter la surcharge sur un seule noeud.
+
+
+CHA-DC1 : 172.28.160.1/24
+CHA-GUI1 : 172.28.160.2/24
+
+On renomme les deux serveurs et on configure l'adressage réseau avant d'installer le rôle AD sur le CHA-DC1.
+
+Installation du rôle AD : 
+```
+Install-WindowsFeature AD-Domain-Services -IncludeManagementTools
+Install-ADDSForest -DomainName "cha.chartres.sportludique.fr" -DomainNetbiosName "CHA" -InstallDNS
+```
+Nous ajoutons un serveur local à gérer sur le serveur CHA-GUI1 et on ajoute CHA-DC1 à gérer.
+
+Des instatanées doivent être pris régulièrement pour nous permettre un retour en arrière.
