@@ -44,14 +44,14 @@ Toutes les annexes réunit sur cette page
 | | Gig0/3 | |
 | | Gig0/4 | |
 | | Gig0/5 | |
-| | Gig0/6 | LAN |
+| | Gig0/6 | |
 | | Gig0/7 | |
-| | Gig0/8 | LAN |
+| | Gig0/8 | |
 | | Gig0/9 | SERVEUR |
-| | Gig0/10 | SERVEUR|
-| | Gig0/11 | CLIENT |
-| | Gig0/12 | CLIENT |
-| | Gig0/13 | CLIENT |
+| | Gig0/10 | SERVEUR |
+| | Gig0/11 | |
+| | Gig0/12 | |
+| | Gig0/13 | |
 | | Gig0/14 | |
 | | Gig0/15 | |
 | | Gig0/16 | |
@@ -60,7 +60,7 @@ Toutes les annexes réunit sur cette page
 | | Gig0/19 | |
 | | Gig0/20 | Serveur |
 | | Gig0/21 | |
-| | Gig0/22 | LAN |
+| | Gig0/22 |  |
 | | Gig0/23 | MANA |
 | | Gig0/24 | MANA |
 | | Gi0/1 | |
