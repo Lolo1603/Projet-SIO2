@@ -89,6 +89,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#schema-physique" class="nav-link">Schéma Physique</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
             <li class="nav-item" data-bs-level="2"><a href="#plage-ip-site" class="nav-link">Plage IP Site</a>
               <ul class="nav flex-column">
               </ul>
@@ -115,6 +119,9 @@
 <p><br></p>
 <h2 id="schema-mana">Schéma Mana</h2>
 <p><img alt="Schéma Mana" src="../img/schema_mana.png" /> 
+<br></p>
+<h2 id="schema-physique">Schéma Physique</h2>
+<p><img alt="Schéma Physique" src="../img/schema_physique.png" />
 <br></p>
 <h2 id="plage-ip-site">Plage IP Site</h2>
 <table>
@@ -200,22 +207,22 @@
 <tr>
 <td style="text-align: center;">R1-CHA</td>
 <td style="text-align: center;">Gig0/1</td>
-<td style="text-align: center;">Trunk</td>
+<td style="text-align: center;">Trunk (MANA / WAN)</td>
 </tr>
 <tr>
 <td style="text-align: center;">R2-CHA</td>
 <td style="text-align: center;">Gig0/2</td>
-<td style="text-align: center;">Trunk</td>
+<td style="text-align: center;">Trunk (MANA / WAN)</td>
 </tr>
 <tr>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">FW-WAN</td>
 <td style="text-align: center;">Gig0/3</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">WAN</td>
 </tr>
 <tr>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">FW-LAN</td>
 <td style="text-align: center;">Gig0/4</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">Trunk (MANA / WAN)</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
@@ -260,12 +267,12 @@
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/13</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">MANA</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/14</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">MANA</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
@@ -300,12 +307,12 @@
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/21</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">MANA</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/22</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">MANA</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>
@@ -315,7 +322,7 @@
 <tr>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">Gig0/24 </td>
-<td style="text-align: center;">MANA</td>
+<td style="text-align: center;">Trunk (MANA / Serveur)</td>
 </tr>
 <tr>
 <td style="text-align: center;"></td>

@@ -118,7 +118,41 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#configuration-de-firewall" class="nav-link">Configuration de firewall</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#mise-a-jour-du-firewall" class="nav-link">Mise a jour du firewall</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#mise-en-place-des-sous-interface" class="nav-link">Mise en place des sous interface</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#mise-en-place-des-routes" class="nav-link">Mise en place des routes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#filtre-et-nat" class="nav-link">Filtre et NAT</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#modif-switch" class="nav-link">Modif switch</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#mise-en-place-des-serveurs" class="nav-link">Mise en place des serveurs</a>
+              <ul class="nav flex-column">
             <li class="nav-item" data-bs-level="2"><a href="#installation-du-dc1-gui1" class="nav-link">Installation du DC1 &amp; GUI1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#configuration-de-gui1" class="nav-link">Configuration de GUI1</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -175,6 +209,7 @@ write memory
 <h2 id="mise-en-place-internet-sur-les-vlans">Mise en place internet sur les vlans</h2>
 <p>On mets la route par défaut pour le switch : <code>0.0.0.0 0.0.0.0 192.168.222.254</code></p>
 <p>On mets la route sur le routeur pour qu'il connaisse le VLAN 221: <code>172.28.161.0 255.255.255.0 192.168.222.1</code></p>
+<p><br></p>
 <h2 id="mise-en-place-du-2eme-routeur">Mise en place du 2eme Routeur</h2>
 <p>On met un deuxieme routeur pour assurer la disponibilité</p>
 <p>On copie la conf du premier routeur sur le deuxieme</p>
@@ -189,6 +224,34 @@ write memory
  standby 1 priority 100
  standby 1 preempt
 </code></pre>
+<h1 id="configuration-de-firewall">Configuration de firewall</h1>
+<p><br></p>
+<h2 id="mise-a-jour-du-firewall">Mise a jour du firewall</h2>
+<p>Mettre une date en 2025</p>
+<p>Redemarrer le firewall</p>
+<p>Installer le fichier de mise a jour</p>
+<p>Mettre le firewall a l'heure</p>
+<p><br></p>
+<h2 id="mise-en-place-des-sous-interface">Mise en place des sous interface</h2>
+<p>Nous avons mis les vlan mana et lan en sous interface dans l'interface in en 802.1Q</p>
+<h2 id="mise-en-place-des-routes">Mise en place des routes</h2>
+<p>Nous avons mis la route du reseau serveur pour qu'il puisse communiquer avec le firewall</p>
+<pre><code>Dest : Serveur
+Interface : lan
+Plan adressage : 172.28.160.0/24
+Passerelle : Pass-Serveur (192.168.223.1)
+</code></pre>
+<h2 id="filtre-et-nat">Filtre et NAT</h2>
+<p>Nous avons mis le firewall en pass all pour tester si tout fonctionne</p>
+<h2 id="modif-switch">Modif switch</h2>
+<p>On a rajouter les vlan 223 et 224</p>
+<p>Le port WAN et la DMZ sont en mode access</p>
+<p>Le port lan est en trunk pour faire passer le vlan Mana et Lan</p>
+<p>On a modifier la route par défaut</p>
+<p><br>
+<br></p>
+<h1 id="mise-en-place-des-serveurs">Mise en place des serveurs</h1>
+<p><br></p>
 <h2 id="installation-du-dc1-gui1">Installation du DC1 &amp; GUI1</h2>
 <p>Le DC1 sera en mode core et le gui sera une interface graphique.</p>
 <p>Pour la création des VMs les ressources sont les mêmes : 2 coeurs, 4go de RAM.</p>
@@ -201,7 +264,15 @@ CHA-GUI1 : 172.28.160.2/24</p>
 Install-ADDSForest -DomainName &quot;cha.chartres.sportludique.fr&quot; -DomainNetbiosName &quot;CHA&quot; -InstallDNS
 </code></pre>
 <p>Nous ajoutons un serveur local à gérer sur le serveur CHA-GUI1 et on ajoute CHA-DC1 à gérer.</p>
-<p>Des instatanées doivent être pris régulièrement pour nous permettre un retour en arrière.</p></div>
+<p>Des instatanées doivent être pris régulièrement pour nous permettre un retour en arrière.</p>
+<h2 id="configuration-de-gui1">Configuration de GUI1</h2>
+<p>Nous avons mis le GUI1 dans le VLAN serveur puis dans le domaine </p>
+<p>On a rajouter une interface dans le vlan MANA pour l'administrer depuis le mana</p>
+<h3 id="probleme">Probleme</h3>
+<p>Interface MANA n'arriver pas a ping la passerelle</p>
+<p>On a vus que sur le switch le port qui est relier au huawei sur le vlan MANA était broken</p>
+<p>Après 2 heure de recherche le prof a regler le probleme en retirent le spamming-tree sur le vlan MANA</p>
+<p>Le probleme peut etre lié au Huawei</p></div>
             </div>
         </div>
 
