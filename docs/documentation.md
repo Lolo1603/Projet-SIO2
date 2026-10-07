@@ -6,6 +6,7 @@ Réinitialisation du switch `erase config-startup`
 
 
 <br>
+
 ## Renommage du switch
 ```
  enable
@@ -18,6 +19,7 @@ Réinitialisation du switch `erase config-startup`
 `vlan [numéro du port]` puis `name [nom_du_VLAN]`
 
 <br>
+
 ## Attribuer des ports aux VLANS
 ```
 interface [numéro du port]
@@ -26,11 +28,13 @@ Switchport access vlan [numéro de vlan]
 ```
 
 <br>
+
 ## Creation d'un utilisateur
 
 `username [admin] privilege 15 secret [password]`
 
 <br>
+
 ## Activation du ssh
 
 Et nous activons les interfaces avec la commande 
@@ -45,9 +49,11 @@ write memory
 ```
 <br>
 <br>
+
 # Configuration Routeur
 
 <br>
+
 ## Mise en place du NAT
 
 Interface du VLAN 120 `interface gig0/0.120` avec l'adresse ip `10.28.2.253 255.255.255.0` 
@@ -63,11 +69,14 @@ Route par défaut : `ip route 0.0.0.0 0.0.0.0 221.87.128.2`
 On mets une acess-list pour avoir internet sur tous les réseaux sauf Mana `access-list 1 permit 172.28.160.0 0.0.31.255`
 
 <br>
+
 ## Mise en place internet sur les vlans
 
 On mets la route par défaut pour le switch : `0.0.0.0 0.0.0.0 192.168.222.254`
 
 On mets la route sur le routeur pour qu'il connaisse le VLAN 221: `172.28.161.0 255.255.255.0 192.168.222.1`
+
+<br>
 
 ## Mise en place du 2eme Routeur
 
@@ -91,6 +100,56 @@ R2:
  standby 1 preempt
 ```
 
+# Configuration de firewall
+
+<br>
+
+## Mise a jour du firewall
+
+Mettre une date en 2025
+
+Redemarrer le firewall
+
+Installer le fichier de mise a jour
+
+Mettre le firewall a l'heure
+
+<br>
+
+## Mise en place des sous interface
+
+Nous avons mis les vlan mana et lan en sous interface dans l'interface in en 802.1Q
+
+## Mise en place des routes
+
+Nous avons mis la route du reseau serveur pour qu'il puisse communiquer avec le firewall
+```
+Dest : Serveur
+Interface : lan
+Plan adressage : 172.28.160.0/24
+Passerelle : Pass-Serveur (192.168.223.1)
+```
+## Filtre et NAT
+
+Nous avons mis le firewall en pass all pour tester si tout fonctionne
+
+## Modif switch
+
+On a rajouter les vlan 223 et 224
+
+Le port WAN et la DMZ sont en mode access
+
+Le port lan est en trunk pour faire passer le vlan Mana et Lan
+
+On a modifier la route par défaut
+
+<br>
+<br>
+
+# Mise en place des serveurs
+
+<br>
+
 ## Installation du DC1 & GUI1
 
 Le DC1 sera en mode core et le gui sera une interface graphique.
@@ -113,3 +172,20 @@ Install-ADDSForest -DomainName "cha.chartres.sportludique.fr" -DomainNetbiosName
 Nous ajoutons un serveur local à gérer sur le serveur CHA-GUI1 et on ajoute CHA-DC1 à gérer.
 
 Des instatanées doivent être pris régulièrement pour nous permettre un retour en arrière.
+
+
+## Configuration de GUI1
+
+Nous avons mis le GUI1 dans le VLAN serveur puis dans le domaine 
+
+On a rajouter une interface dans le vlan MANA pour l'administrer depuis le mana
+
+### Probleme
+
+Interface MANA n'arriver pas a ping la passerelle
+
+On a vus que sur le switch le port qui est relier au huawei sur le vlan MANA était broken
+
+Après 2 heure de recherche le prof a regler le probleme en retirent le spamming-tree sur le vlan MANA
+
+Le probleme peut etre lié au Huawei

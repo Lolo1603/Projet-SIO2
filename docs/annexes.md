@@ -12,6 +12,12 @@ Toutes les annexes réunit sur cette page
 
 ![Schéma Mana](img/schema_mana.png) 
 <br>
+
+## Schéma Physique
+
+![Schéma Physique](img/schema_physique.png)
+<br>
+
 ## Plage IP Site
 
 |          | Reseau       | Broadcast      |
@@ -39,29 +45,29 @@ Toutes les annexes réunit sur cette page
 
 | SW-Chartres | Ports | VLAN |
 |:-:|:-:|:-:|
-| R1-CHA | Gig0/1 | Trunk |
-| R2-CHA | Gig0/2 | Trunk |
-| | Gig0/3 | |
-| | Gig0/4 | |
+| R1-CHA | Gig0/1 | Trunk (MANA / WAN) |
+| R2-CHA | Gig0/2 | Trunk (MANA / WAN) |
+| FW-WAN | Gig0/3 | WAN |
+| FW-LAN | Gig0/4 | Trunk (MANA / WAN) |
 | | Gig0/5 | |
-| | Gig0/6 | LAN |
+| | Gig0/6 | |
 | | Gig0/7 | |
-| | Gig0/8 | LAN |
+| | Gig0/8 | |
 | | Gig0/9 | SERVEUR |
-| | Gig0/10 | SERVEUR|
-| | Gig0/11 | CLIENT |
-| | Gig0/12 | CLIENT |
-| | Gig0/13 | CLIENT |
-| | Gig0/14 | |
+| | Gig0/10 | SERVEUR |
+| | Gig0/11 | |
+| | Gig0/12 | |
+| | Gig0/13 | MANA |
+| | Gig0/14 | MANA |
 | | Gig0/15 | |
 | | Gig0/16 | |
 | | Gig0/17 | |
 | | Gig0/18 | |
 | | Gig0/19 | |
 | | Gig0/20 | Serveur |
-| | Gig0/21 | |
-| | Gig0/22 | LAN |
+| | Gig0/21 | MANA |
+| | Gig0/22 | MANA |
 | | Gig0/23 | MANA |
-| | Gig0/24 | MANA |
+| | Gig0/24 | Trunk (MANA / Serveur) |
 | | Gi0/1 | |
 | | Gi0/2 | |
