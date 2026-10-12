@@ -1,6 +1,5 @@
 # Annexes
-Toutes les annexes réunit sur cette page
-
+Toutes les annexes sont réunies sur cette page.
 ## Schéma Logique
 
 ![Schéma Logique Actuelle](img/schema_logique.png)
