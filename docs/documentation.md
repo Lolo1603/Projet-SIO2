@@ -71,8 +71,13 @@ On mets une acess-list pour avoir internet sur tous les réseaux sauf Mana `acce
 On mets la route par défaut pour le switch : `0.0.0.0 0.0.0.0 192.168.222.254`
 
 On mets la route sur le routeur pour qu'il connaisse le VLAN 221: `172.28.161.0 255.255.255.0 192.168.222.1`
-Configuration
-## 2.3) Mise en place du 2eme Routeur
+
+## 2.3) Redirection de port vers la DMZ
+
+Pour nous permettre d'accéder au serveur DNS depuis l'extérieur, nous avons paramétré une redirection de port avec la commande ci-dessous :
+`ip nat inside source static udp 192.168.224.1 53 interface 221.87.128.1 53`
+
+## 2.4) Mise en place du 2eme Routeur
 
 On met un deuxieme routeur pour assurer la disponibilité
 
@@ -195,3 +200,101 @@ write memory
 Pour ensuite tester que notre solution fonctionne bien, nous avons remis en place le protocole Spanning Tree et nous avons testé l'accès au serveur CHA-GUI1 via son interface de Mana et le test fut un succès.
 
 Nous supposons que l'erreur vient d'une mauvaise réinitialisation du switch.
+
+# <font color= 'red'> 5 - Mise en place du DNS PUBLIC - DMZ </font>
+
+## 5.1) Création de la VM
+
+Nous avons créer une machine virtuelle sous linux.
+
+Pour la mise en place de notre DNS PUBLIC, nous avons décidé d'utiliser BIND9.
+
+Pour se faire, nous aurons notre serveur DNS CHA-DNS2 en 192.168.224.1/24.
+
+Nous installons ensuite BIND9 :
+```
+sudo apt update
+sudo apt install bind9 bind9-utils dnsutils
+```
+## 5.2) Configurer BIND comme DNS autoritatif uniquement
+
+On édite :
+```
+sudo nano /etc/bind/named.conf.options
+```
+
+Puis on insère le fichier de configuration suivant :
+```
+options {
+        directory "/var/cache/bind";
+
+        listen-on {
+            127.0.0.1; 
+            192.168.224.1; 
+};
+        listen-on-v6 { none; };
+
+        recursion no;
+
+        allow-query { any; };
+        allow-recursion { none; };
+
+        allow-transfer { none; };
+
+        version "not disclosed";
+
+        dnssec-validation auto;
+};
+```
+## 5.3) Création de la zone chartres.sportludique.fr
+
+On crée le fichier de configuration pour créer la zone : `sudo nano /etc/bind/zones/db.chartres.sportludique.fr`
+
+Ensuite, nous le configurons de la manière suivante :
+```
+$TTL 3600
+
+@   IN SOA ns.chartres.sportludique.fr. admin.chartres.sportludique.fr. (
+        2026101301
+        3600
+        900
+        604800
+        3600
+)
+
+@            IN NS      ns.chartres.sportludique.fr.
+
+ns           IN A       221.87.128.1
+
+@            IN A       221.87.128.1
+www          IN A       221.87.128.1
+```
+Nous devons par la suite ajouter la redirection de port sur le routeur, pour permettre aux utilisateurs en dehors du LAN d'y accéder (voir 2.3).
+
+Après avoir réaliser toutes ces étapes, nous pouvons donc tester l'accès depuis l'extérieur avec la commande suivantes : `dig 221.87.128.1 www.chartres.sportludique.fr`
+
+Et nous devons le résultat suivant :
+```
+administrateur@CHA-DNS2:/etc/bind/zones$ dig @121.183.90.205 www.chartres.sportludique.fr A 
+;; communications error to 121.183.90.205#53: timed out 
+ 
+; <<>> DiG 9.20.29-1~deb13u1-Debian <<>> @121.183.90.205 www.chartres.sportludique.fr A 
+; (1 server found) 
+;; global options: +cmd 
+;; Got answer: 
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 29782 
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1 
+ 
+;; OPT PSEUDOSECTION: 
+; EDNS: version: 0, flags:; udp: 1232 
+;; QUESTION SECTION: 
+;www.chartres.sportludique.fr.  IN      A 
+ 
+;; ANSWER SECTION: 
+www.chartres.sportludique.fr. 3600 IN   A       221.87.128.1 
+ 
+;; Query time: 11 msec 
+;; SERVER: 121.183.90.205#53(121.183.90.205) (UDP) 
+;; WHEN: Tue Oct 13 15:54:28 CEST 2026 
+;; MSG SIZE  rcvd: 73
+```
