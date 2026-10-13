@@ -118,7 +118,11 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#23-mise-en-place-du-2eme-routeur" class="nav-link">2.3) Mise en place du 2eme Routeur</a>
+            <li class="nav-item" data-bs-level="2"><a href="#23-redirection-de-port-vers-la-dmz" class="nav-link">2.3) Redirection de port vers la DMZ</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#24-mise-en-place-du-2eme-routeur" class="nav-link">2.4) Mise en place du 2eme Routeur</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -153,6 +157,23 @@
               </ul>
             </li>
             <li class="nav-item" data-bs-level="2"><a href="#42configuration-de-gui1" class="nav-link">4.2)Configuration de GUI1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-bs-level="1"><a href="#5-mise-en-place-du-dns-public-dmz" class="nav-link">5 - Mise en place du DNS PUBLIC - DMZ</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#51-creation-de-la-vm" class="nav-link">5.1) Création de la VM</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#52-configurer-bind-comme-dns-autoritatif-uniquement" class="nav-link">5.2) Configurer BIND comme DNS autoritatif uniquement</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#53-creation-de-la-zone-chartressportludiquefr" class="nav-link">5.3) Création de la zone chartres.sportludique.fr</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -207,9 +228,11 @@ Interface WAN <code>ip address 221.87.128.1 255.255.255.252</code> et <code>ip n
 <p>On mets une acess-list pour avoir internet sur tous les réseaux sauf Mana <code>access-list 1 permit 172.28.160.0 0.0.31.255</code></p>
 <h2 id="22-mise-en-place-internet-sur-les-vlans">2.2) Mise en place internet sur les vlans</h2>
 <p>On mets la route par défaut pour le switch : <code>0.0.0.0 0.0.0.0 192.168.222.254</code></p>
-<p>On mets la route sur le routeur pour qu'il connaisse le VLAN 221: <code>172.28.161.0 255.255.255.0 192.168.222.1</code>
-Configuration</p>
-<h2 id="23-mise-en-place-du-2eme-routeur">2.3) Mise en place du 2eme Routeur</h2>
+<p>On mets la route sur le routeur pour qu'il connaisse le VLAN 221: <code>172.28.161.0 255.255.255.0 192.168.222.1</code></p>
+<h2 id="23-redirection-de-port-vers-la-dmz">2.3) Redirection de port vers la DMZ</h2>
+<p>Pour nous permettre d'accéder au serveur DNS depuis l'extérieur, nous avons paramétré une redirection de port avec la commande ci-dessous :
+<code>ip nat inside source static udp 192.168.224.1 53 interface 221.87.128.1 53</code></p>
+<h2 id="24-mise-en-place-du-2eme-routeur">2.4) Mise en place du 2eme Routeur</h2>
 <p>On met un deuxieme routeur pour assurer la disponibilité</p>
 <p>On copie la conf du premier routeur sur le deuxieme</p>
 <p>On config HSRP sur les 2 routeurs</p>
@@ -289,7 +312,88 @@ end
 write memory
 </code></pre>
 <p>Pour ensuite tester que notre solution fonctionne bien, nous avons remis en place le protocole Spanning Tree et nous avons testé l'accès au serveur CHA-GUI1 via son interface de Mana et le test fut un succès.</p>
-<p>Nous supposons que l'erreur vient d'une mauvaise réinitialisation du switch.</p></div>
+<p>Nous supposons que l'erreur vient d'une mauvaise réinitialisation du switch.</p>
+<h1 id="5-mise-en-place-du-dns-public-dmz"><font color= 'red'> 5 - Mise en place du DNS PUBLIC - DMZ </font></h1>
+<h2 id="51-creation-de-la-vm">5.1) Création de la VM</h2>
+<p>Nous avons créer une machine virtuelle sous linux.</p>
+<p>Pour la mise en place de notre DNS PUBLIC, nous avons décidé d'utiliser BIND9.</p>
+<p>Pour se faire, nous aurons notre serveur DNS CHA-DNS2 en 192.168.224.1/24.</p>
+<p>Nous installons ensuite BIND9 :</p>
+<pre><code>sudo apt update
+sudo apt install bind9 bind9-utils dnsutils
+</code></pre>
+<h2 id="52-configurer-bind-comme-dns-autoritatif-uniquement">5.2) Configurer BIND comme DNS autoritatif uniquement</h2>
+<p>On édite :</p>
+<pre><code>sudo nano /etc/bind/named.conf.options
+</code></pre>
+<p>Puis on insère le fichier de configuration suivant :</p>
+<pre><code>options {
+        directory &quot;/var/cache/bind&quot;;
+
+        listen-on {
+            127.0.0.1; 
+            192.168.224.1; 
+};
+        listen-on-v6 { none; };
+
+        recursion no;
+
+        allow-query { any; };
+        allow-recursion { none; };
+
+        allow-transfer { none; };
+
+        version &quot;not disclosed&quot;;
+
+        dnssec-validation auto;
+};
+</code></pre>
+<h2 id="53-creation-de-la-zone-chartressportludiquefr">5.3) Création de la zone chartres.sportludique.fr</h2>
+<p>On crée le fichier de configuration pour créer la zone : <code>sudo nano /etc/bind/zones/db.chartres.sportludique.fr</code></p>
+<p>Ensuite, nous le configurons de la manière suivante :</p>
+<pre><code>$TTL 3600
+
+@   IN SOA ns.chartres.sportludique.fr. admin.chartres.sportludique.fr. (
+        2026101301
+        3600
+        900
+        604800
+        3600
+)
+
+@            IN NS      ns.chartres.sportludique.fr.
+
+ns           IN A       221.87.128.1
+
+@            IN A       221.87.128.1
+www          IN A       221.87.128.1
+</code></pre>
+<p>Nous devons par la suite ajouter la redirection de port sur le routeur, pour permettre aux utilisateurs en dehors du LAN d'y accéder (voir 2.3).</p>
+<p>Après avoir réaliser toutes ces étapes, nous pouvons donc tester l'accès depuis l'extérieur avec la commande suivantes : <code>dig 221.87.128.1 www.chartres.sportludique.fr</code></p>
+<p>Et nous devons le résultat suivant :</p>
+<pre><code>administrateur@CHA-DNS2:/etc/bind/zones$ dig @121.183.90.205 www.chartres.sportludique.fr A 
+;; communications error to 121.183.90.205#53: timed out 
+
+; &lt;&lt;&gt;&gt; DiG 9.20.29-1~deb13u1-Debian &lt;&lt;&gt;&gt; @121.183.90.205 www.chartres.sportludique.fr A 
+; (1 server found) 
+;; global options: +cmd 
+;; Got answer: 
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 29782 
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1 
+
+;; OPT PSEUDOSECTION: 
+; EDNS: version: 0, flags:; udp: 1232 
+;; QUESTION SECTION: 
+;www.chartres.sportludique.fr.  IN      A 
+
+;; ANSWER SECTION: 
+www.chartres.sportludique.fr. 3600 IN   A       221.87.128.1 
+
+;; Query time: 11 msec 
+;; SERVER: 121.183.90.205#53(121.183.90.205) (UDP) 
+;; WHEN: Tue Oct 13 15:54:28 CEST 2026 
+;; MSG SIZE  rcvd: 73
+</code></pre></div>
             </div>
         </div>
 
