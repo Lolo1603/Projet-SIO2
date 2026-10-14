@@ -177,6 +177,10 @@
               <ul class="nav flex-column">
               </ul>
             </li>
+            <li class="nav-item" data-bs-level="2"><a href="#54-mise-en-place-du-dns-interne" class="nav-link">5.4) Mise en place du DNS Interne</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -393,7 +397,12 @@ www.chartres.sportludique.fr. 3600 IN   A       221.87.128.1
 ;; SERVER: 121.183.90.205#53(121.183.90.205) (UDP) 
 ;; WHEN: Tue Oct 13 15:54:28 CEST 2026 
 ;; MSG SIZE  rcvd: 73
-</code></pre></div>
+</code></pre>
+<h2 id="54-mise-en-place-du-dns-interne">5.4) Mise en place du DNS Interne</h2>
+<p>Pour ce faire, nous avons créé une machine virtuelle sous Windows Server 2022 (Core).</p>
+<p>Après la configuration et l'installation, nous l'avons jointe au domaine, puis nous avons pu  l'ajouter au serveur CHA-GUI1 pour nous permettre de l'administrer.</p>
+<p>Nous avons installé le service DNS sur le serveur CHA-DNS1 ainsi que les outils d'administration à distance sur notre serveur CHA-GUI1.</p>
+<p>Ensuite, nous avons créé la zone principale avec le nom <code>chartres.sportludique.fr</code></p></div>
             </div>
         </div>
 
