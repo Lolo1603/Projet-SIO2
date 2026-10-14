@@ -298,3 +298,15 @@ www.chartres.sportludique.fr. 3600 IN   A       221.87.128.1
 ;; WHEN: Tue Oct 13 15:54:28 CEST 2026 
 ;; MSG SIZE  rcvd: 73
 ```
+
+## 5.4) Mise en place du DNS Interne
+
+Pour ce faire, nous avons créé une machine virtuelle sous Windows Server 2022 (Core).
+
+Après la configuration et l'installation, nous l'avons jointe au domaine, puis nous avons pu  l'ajouter au serveur CHA-GUI1 pour nous permettre de l'administrer.
+
+Nous avons installé le service DNS sur le serveur CHA-DNS1 ainsi que les outils d'administration à distance sur notre serveur CHA-GUI1.
+
+Ensuite, nous avons créé la zone principale avec le nom `chartres.sportludique.fr`
+
+
